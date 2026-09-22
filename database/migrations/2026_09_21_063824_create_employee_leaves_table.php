@@ -9,13 +9,28 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('employee_leaves', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
-    }
+public function up(): void
+{
+    Schema::create('employee_leaves', function (Blueprint $table) {
+        $table->id();
+
+        $table->foreignId('employee_id')
+            ->constrained('employees')
+            ->cascadeOnDelete();
+
+        $table->string('leave_type');
+        $table->date('from_date');
+        $table->date('to_date');
+        $table->text('reason')->nullable();
+        $table->string('status')->default('pending');
+        $table->foreignId('approved_by')
+            ->nullable()
+            ->constrained('users')
+            ->nullOnDelete();
+
+        $table->timestamps();
+    });
+}
 
     /**
      * Reverse the migrations.
