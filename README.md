@@ -1,59 +1,124 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# StaffFlow - Employee Management System (EMS)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A modern, full-featured **Employee Management System** built with **Laravel 12**, **Tailwind CSS**, and **MySQL**, designed with authentic regional context (West Bengal, India), complete employee lifecycle tracking, leave workflows, and official PDF generation.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Key Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 1. 📊 Executive Dashboard
+- **Real-time Metrics**: Total staff count, active/inactive ratio, active departments, pending leave requests, approved/rejected tallies.
+- **Quick Action Bar**: Shortcuts to add employees, create departments, and apply for leaves.
+- **Recent Activities**: Interactive recent leaves table with one-click inline **Approve** / **Reject** buttons and recent employee rosters.
+- **Department Distribution**: Live visual staffing breakdown across departments.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 2. 👥 Employee Management (CRUD & Profile)
+- **Directory & Multi-Filter**: Search by name, employee code, email, designation; filter by department and status.
+- **Comprehensive Profile**: Personal particulars, contact numbers, residential address, service tenure calculation, live age calculation, and annual compensation (₹ CTC).
+- **Profile Photo Upload**: Secure storage handling with dynamic UI-avatars fallback and automatic storage cleanup.
+- **Downloadable PDF Dossier**: Download official, certified Employee Profile & Service Record PDF (`/employees/{id}/pdf`).
 
-## Learning Laravel
+### 3. 🏢 Department Management
+- **Full Department Lifecycle**: Create, edit, list with active staff counts (`withCount('employees')`).
+- **Department Roster View**: View all team members reporting under a department.
+- **Safe Deletion**: Guard preventing accidental deletion of departments that have assigned employees.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### 4. 📅 Leave Management & Approval Workflow
+- **Application Workflow**: Apply for Annual, Sick, Casual, Maternity/Paternity, and Unpaid leaves with date range validation.
+- **Approval Processing**: Dedicated status filters (*All, Pending, Approved, Rejected*).
+- **Audit Tracking**: Automatic recording of approving admin and timestamp.
+- **Downloadable PDF Slip**: Official Leave Application & Approval Slip with color-coded status badges and signature sections (`/leaves/{id}/pdf`).
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 5. 🌏 Authentic Regional Context
+- Pre-seeded with realistic Bengali names, Kolkata & West Bengal addresses, Indian phone numbers, and cultural leave reasons (Durga Puja, Kali Puja, Darjeeling trips, medical consultations).
+- Formatted in Indian Rupees (**₹ INR**).
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🛠️ Tech Stack
 
-### Premium Partners
+- **Backend**: Laravel 12 (PHP 8.2+)
+- **Frontend**: Blade, Tailwind CSS v4, Vite
+- **Database**: MySQL (compatible with SQLite for testing)
+- **PDF Generation**: `barryvdh/laravel-dompdf` (Dompdf)
+- **Testing**: Pest PHP (30 automated feature tests)
+- **Code Style**: Laravel Pint
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+---
 
-## Contributing
+## 📦 Installation & Setup
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Prerequisites
+- PHP >= 8.2 with PDO, OpenSSL, Mbstring, and GD extensions
+- Composer
+- Node.js & npm
+- MySQL / MariaDB (e.g., via XAMPP)
 
-## Code of Conduct
+### Steps
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/nandysubham/employee-management.git
+   cd employee-management
+   ```
 
-## Security Vulnerabilities
+2. **Install dependencies**:
+   ```bash
+   composer install
+   npm install
+   ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+3. **Configure Environment**:
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-## License
+   Update your `.env` database configuration:
+   ```env
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=employee_management
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+4. **Run Migrations & Seeders**:
+   ```bash
+   php artisan migrate --seed
+   php artisan storage:link
+   ```
+
+5. **Build Frontend Assets**:
+   ```bash
+   npm run build
+   ```
+
+6. **Start Development Server**:
+   ```bash
+   php artisan serve
+   ```
+   Access the app at: `http://localhost:8000`
+
+---
+
+## 🔐 Default Credentials
+
+- **Admin Email**: `admin@example.com`
+- **Password**: `password`
+
+---
+
+## 🧪 Running Automated Tests
+
+Run the complete test suite with **Pest**:
+```bash
+php artisan test --compact
+```
+
+---
+
+## 📄 License
+
+This project is open-sourced software licensed under the [MIT license](LICENSE).
